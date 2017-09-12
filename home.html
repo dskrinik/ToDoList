@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> To-Do-List-Mini-App</title>
+	<link href="cssfile.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="app1.js" defer></script>
+</head>
+<body>
+	<main>
+		<article class="articleBox">
+			<h1> To-Do List</h1>
+			<div class="textFieldAndAddButton">
+					  <input type="text" class="textBox" placeholder="To-do"/>
+					  <input type="button" class="addButton" value="ADD"/>
+			</div>
+			<form class="taskBlock">
+				<table id="table1">
+					task:
+					<tr>
+						<td><div><input type="checkbox" class="checkBox" value="false"
+							onchange= "crossOutIfCheked(this);">
+							<label onfocusout = "outOfFocus(this);"> Your first task will go here</label></div></td>
+						<td><input type="button" value="edit" class="editButton" onclick="editTask(this);"></td>
+						<td><input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)"></td>
+					</tr>
+					<tr>
+						<td><div id="taskName"><input type="checkbox" class="checkBox" value="false"
+							onchange ="crossOutIfCheked(this);">
+							<label onfocusout = "outOfFocus(this);"> Second goes here, and so on...</label></div></td>
+						<td><input type="button" value="edit" class="editButton" onclick="editTask(this);"></td>
+						<td><input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)"></td>
+					</tr>
+				</table>
+			</form>
+	</article>
+	</main>
+</body>
+
+</html>
