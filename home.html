@@ -3,6 +3,7 @@
 <head>
 	<title> To-Do-List-Mini-App</title>
 	<link href="cssfile.css" rel="stylesheet" type="text/css" media="all">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="app1.js" defer></script>
 </head>
 <body>
@@ -17,18 +18,32 @@
 				<table id="table1">
 					task:
 					<tr>
-						<td><div><input type="checkbox" class="checkBox" value="false"
-							onchange= "crossOutIfCheked(this);">
-							<label onfocusout = "outOfFocus(this);"> Your first task will go here</label></div></td>
-						<td><input type="button" value="edit" class="editButton" onclick="editTask(this);"></td>
-						<td><input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)"></td>
+						<td>
+							<div>
+								<input type="checkbox" class="checkBox" value="false" onchange= "crossOutIfCheked(this);">
+								<label onfocusout = "outOfFocus(this);"> Your first task will go here</label>
+								</div>
+							</td>
+						<td>
+							<input type="button" value="edit" class="editButton" onclick="editTask(this);">
+						</td>
+						<td>
+							<input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)">
+						</td>
 					</tr>
 					<tr>
-						<td><div id="taskName"><input type="checkbox" class="checkBox" value="false"
-							onchange ="crossOutIfCheked(this);">
-							<label onfocusout = "outOfFocus(this);"> Second goes here, and so on...</label></div></td>
-						<td><input type="button" value="edit" class="editButton" onclick="editTask(this);"></td>
-						<td><input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)"></td>
+						<td>
+							<div>
+								<input type="checkbox" class="checkBox" value="false" onchange ="crossOutIfCheked(this);">
+								<label onfocusout = "outOfFocus(this);"> Second goes here, and so on...</label>
+							</div>
+						</td>
+						<td>
+							<input type="button" value="edit" class="editButton" onclick="editTask(this);">
+						</td>
+						<td>
+							<input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)">
+						</td>
 					</tr>
 				</table>
 			</form>

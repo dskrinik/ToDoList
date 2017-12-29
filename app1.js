@@ -1,18 +1,23 @@
-var ADDB = document.querySelector('.addButton');
 var TEXTF = document.querySelector('.textBox');
 
-function editTask(element) {
-  //if edit is clicked then uncheck the checkbox
-  var p = element.parentNode.parentNode;
-  var checkBox = p.querySelector('.checkBox');
-  if (checkBox.checked)
-    checkBox.checked = false;
-  crossOutIfCheked(p.childNodes[1]);
+//uncheck the checkbox when edit button is clicked
+//and make its tasks editable
+var editTask = function (element) {
+  //element is inside 2nd td (table cell)
 
-  //now edit the task
-  p.cells[0].getElementsByTagName('label')[0].setAttribute('contenteditable', 'true');
-  p.cells[0].getElementsByTagName('label')[0].focus();
-}
+  var pointer = $(element).closest('tr');//this row level
+
+  //uncheck the checkbox incase it's checked
+  $(pointer).find('input').prop('checked', false);
+
+  //remove crossOut line by calling crossOutIfCheked
+  var argument = $(pointer).find('input:first');//checkbox element level
+  crossOutIfCheked(argument);
+
+  //make task editable
+  $(pointer).find('label').attr('contenteditable', true);
+  $(pointer).find('label').focus();
+};
 
 //When task name is tabbed out it should no longer be editable
 function outOfFocus(element) {
@@ -27,23 +32,33 @@ function deleteTask(element) {
 
 //checkbox crosses the taskName
 var crossOutIfCheked = function (element) {
-  var p = element.parentNode;
-  var checkBox = p.querySelector('.checkBox');
-  if (checkBox.checked) {
-    p.getElementsByTagName('label')[0].style.textDecoration = 'line-through';
+  //element need to point to 1sr td div
+  //when crossOutIfCheked is called directly from html,element is inside 1rs td
+  //when other functions call crossOutIfCheked, pass element as div
+  var pointer;
+  if ($(element).is('div')) {
+    pointer = element;
+  }
+  pointer = $(element).parent();//1st td div level
+  var cBox = $(pointer).find('input');//input element is where checkbox located
+  if (cBox.is(':checked')) {
+    $(pointer).find('label').css({ 'text-decoration': 'line-through' });
   } else {
-    p.getElementsByTagName('label')[0].removeAttribute('style');
+    $(pointer).find('label').css({ 'text-decoration': '' });
   }
 };
 
 //addbutton creating and adding new tasks
-ADDB.addEventListener('click',
+var addButton = document.querySelector('.addButton');
+addButton.addEventListener('click',
   function (e) {
-    addTaskButton(e, this);
+    buttonAddsTask(e, this);
   }, false);
 
-//crete space for a new task and add it to the table via the ADDbutton
-function addTaskButton(e, current) {
+//crete space for a new task and add it to the table via the addButton
+var buttonAddsTask = function (e, current) {
+
+  //prevent from textbox to instantly process
   e.preventDefault();
   current = TEXTF.value;
   if (current == '') {
@@ -69,13 +84,13 @@ function addTaskButton(e, current) {
 //textfield adds a new taks
 TEXTF.addEventListener('keyup',
   function (e) {
-    addTask(e, this);
+    enterAddsTask(e, this);
   },
 
   false);
 
 //create space for a new task and add it to the table via the text field
-function addTask(e, current) {
+function enterAddsTask(e, current) {
   e.preventDefault();
   current = TEXTF.value;
   if (current == '') {
