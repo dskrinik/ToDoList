@@ -5,13 +5,14 @@ $('label').focusout(function () {
   $(this).attr('contenteditable', false);
 });
 
-//delete button function
+//delete button action
 $('.deleteButton').click(function () {
   $(this).closest('tr').remove();
 });
 
-//uncheck the checkbox when edit button is clicked
-//and make its tasks editable
+//editButton action
+//uncheck the checkbox when editButton is clicked
+//and make its task editable
 var editTask = function (element) {
   //element is inside 2nd td (table cell)
 
@@ -29,7 +30,8 @@ var editTask = function (element) {
   $(pointer).find('label').focus();
 };
 
-//checkbox crosses the taskName
+//checkbox action
+//cross out the task when checkbox is checked, and viceversa
 var crossOutIfCheked = function (element) {
   //element need to point to 1sr td div
   //when crossOutIfCheked is called directly from html,element is inside 1rs td
@@ -38,6 +40,7 @@ var crossOutIfCheked = function (element) {
   if ($(element).is('div')) {
     pointer = element;
   }
+
   pointer = $(element).parent();//1st td div level
   var cBox = $(pointer).find('input');//input element is where checkbox located
   if (cBox.is(':checked')) {
@@ -47,24 +50,23 @@ var crossOutIfCheked = function (element) {
   }
 };
 
-//addbutton add new task
+//addButton action
 var addButton = document.querySelector('.addButton');
 addButton.addEventListener('click',
   function (e) {
     setUpNewRow(e, this);
   });
 
-//textfield add new taks
+//textfield action
 TEXTF.addEventListener('keyup',
   function (e) {
     setUpNewRow(e, this);
   });
 
-//new task via textfield
 function setUpNewRow(e, current) {
   e.preventDefault();
 
-  //is button calling this method
+  //addbutton is calling this method
   if (current.type == 'button') {
     current = TEXTF.value;
     if (current == '')
