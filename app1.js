@@ -1,5 +1,15 @@
 var TEXTF = document.querySelector('.textBox');
 
+//When task name is tabbed out it should no longer be editable
+$('label').focusout(function () {
+  $(this).attr('contenteditable', false);
+});
+
+//delete button function
+$('.deleteButton').click(function () {
+  $(this).closest('tr').remove();
+});
+
 //uncheck the checkbox when edit button is clicked
 //and make its tasks editable
 var editTask = function (element) {
@@ -19,17 +29,6 @@ var editTask = function (element) {
   $(pointer).find('label').focus();
 };
 
-//When task name is tabbed out it should no longer be editable
-function outOfFocus(element) {
-  element.setAttribute('contenteditable', 'false');
-}
-
-//delete button function
-function deleteTask(element) {
-  var p = element.parentNode.parentNode;
-  p.parentNode.removeChild(p);
-}
-
 //checkbox crosses the taskName
 var crossOutIfCheked = function (element) {
   //element need to point to 1sr td div
@@ -48,69 +47,68 @@ var crossOutIfCheked = function (element) {
   }
 };
 
-//addbutton creating and adding new tasks
+//addbutton add new task
 var addButton = document.querySelector('.addButton');
 addButton.addEventListener('click',
   function (e) {
-    buttonAddsTask(e, this);
-  }, false);
+    setUpNewRow(e, this);
+  });
 
-//crete space for a new task and add it to the table via the addButton
-var buttonAddsTask = function (e, current) {
+//textfield add new taks
+TEXTF.addEventListener('keyup',
+  function (e) {
+    setUpNewRow(e, this);
+  });
 
-  //prevent from textbox to instantly process
+//new task via textfield
+function setUpNewRow(e, current) {
   e.preventDefault();
-  current = TEXTF.value;
-  if (current == '') {
-    alert('Pease enter a task');
-  } else {
-    var table = document.getElementById('table1');
-    var row = table.insertRow(0);
-    var c1 = row.insertCell(0);
-    var c2 = row.insertCell(1);
-    var c3 = row.insertCell(2);
-    var newInputAndLabel = ('<input type="checkbox" class="checkBox" value="false"' +
-        'onchange= "crossOutIfCheked(this);"><label onfocusout = "outOfFocus(this);">') +
-      current + ('</label></div>');
-    var newEdit = ('<input type="button" value="edit" class="editButton" onclick="editTask(this);">');
-    var newDelete = ('<input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)">');
-    c1.innerHTML = newInputAndLabel;
-    c2.innerHTML = newEdit;
-    c3.innerHTML = newDelete;
-    TEXTF.value = '';
+
+  //is button calling this method
+  if (current.type == 'button') {
+    current = TEXTF.value;
+    if (current == '')
+      alert('Please enter a task');
+    else buildNewRow(current);
+  }
+
+  //textfield is calling this method
+  else {
+    current = TEXTF.value;
+    if (e.keyCode === 13 && current != '') {
+      buildNewRow(current);
+    }
+
+    if (current == '') {
+      alert('Please enter a task');
+    }
   }
 }
 
-//textfield adds a new taks
-TEXTF.addEventListener('keyup',
-  function (e) {
-    enterAddsTask(e, this);
-  },
-
-  false);
-
-//create space for a new task and add it to the table via the text field
-function enterAddsTask(e, current) {
-  e.preventDefault();
-  current = TEXTF.value;
-  if (current == '') {
-    alert('Pease enter a task');
-  } else {
-    if (e.keyCode === 13) { //this is the diff from the addbutton
-      var table = document.getElementById('table1');
-      var row = table.insertRow(0);
-      var c1 = row.insertCell(0);
-      var c2 = row.insertCell(1);
-      var c3 = row.insertCell(2);
-      var newInputAndLabel = ('<input type="checkbox" class="checkBox" value="false"' +
-          'onchange= "crossOutIfCheked(this);"><label onfocusout = "outOfFocus(this);">') +
+//build new row
+function buildNewRow(current) {
+  var table = document.getElementById('table1');
+  var row = table.insertRow(0);
+  var c1 = row.insertCell(0);
+  var c2 = row.insertCell(1);
+  var c3 = row.insertCell(2);
+  var newInputAndLabel = ('<input type="checkbox" class="checkBox" value="false"' +
+          'onchange= "crossOutIfCheked(this);"><label>') +
         current + ('</label></div>');
-      var newEdit = ('<input type="button" value="edit" class="editButton" onclick="editTask(this);">');
-      var newDelete = ('<input type="button" value="delete" class="deleteButton" onclick="deleteTask(this)">');
-      c1.innerHTML = newInputAndLabel;
-      c2.innerHTML = newEdit;
-      c3.innerHTML = newDelete;
-      TEXTF.value = '';
-    }
-  }
+  var newEdit = ('<input type="button" value="edit" class="editButton" onclick="editTask(this);">');
+  var newDelete = ('<input type="button" value="delete" class="deleteButton">');
+  c1.innerHTML = newInputAndLabel;
+  c2.innerHTML = newEdit;
+  c3.innerHTML = newDelete;
+  TEXTF.value = '';
+
+  //When task name is tabbed out it should no longer be editable
+  $('label').focusout(function () {
+    $(this).attr('contenteditable', false);
+  });
+
+  //delete button function
+  $('.deleteButton').click(function () {
+    $(this).closest('tr').remove();
+  });
 }
