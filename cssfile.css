@@ -6,26 +6,19 @@
 
 body {
   margin: 5%;
-  width: 80%;
+  width: 35%;
 }
 
-.articleBox {
-  height: 400px;
+#articleBox {
   display: inline-block;
 }
 
-.taskBlock {
-  background: white;
+#taskBlock {
   border: rgb(112, 107, 115);
   border-style: solid;
   border-width: 2px;
   border-radius: 3px;
   padding: .5em;
-}
-
-table {
-  width: 100%;
-  text-align: left;
 }
 
 h1 {
@@ -34,17 +27,17 @@ h1 {
   font-size: 1em;
 }
 
-.textFieldAndAddButton {
+#textFieldAndAddButton {
   padding-bottom: .5em;
 }
 
-.textBox {
+#textBox {
   border-radius: 3px;
   width: 250px;
   padding: .2em;
 }
 
-.addButton {
+#addButton {
   background-color: green;
   font-weight: bold;
   color: white;

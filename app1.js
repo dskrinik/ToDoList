@@ -1,4 +1,4 @@
-var TEXTF = document.querySelector('.textBox');
+var TEXTF = document.getElementById('textBox');
 
 //When task name is tabbed out it should no longer be editable
 $('label').focusout(function () {
@@ -51,7 +51,7 @@ var crossOutIfCheked = function (element) {
 };
 
 //addButton action
-var addButton = document.querySelector('.addButton');
+var addButton = document.getElementById('addButton');
 addButton.addEventListener('click',
   function (e) {
     setUpNewRow(e, this);
