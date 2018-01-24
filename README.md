@@ -19,7 +19,8 @@ If the user refreshes the page, the task list will be cleared
 
 
 Screenshots:
-
+![todo_1](https://user-images.githubusercontent.com/25467804/35349926-5852cc84-010a-11e8-905c-ed94616f2dd4.png)
+![todo_2](https://user-images.githubusercontent.com/25467804/35349950-63005728-010a-11e8-9b61-08aa12eedbaa.png)
 
 
 
